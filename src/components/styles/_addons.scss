@@ -1,0 +1,14 @@
+.db, .db_ > * {
+  display: block;
+}
+
+.dib, .dib_ > * {
+  display: inline-block;
+}
+
+.wp {
+  &-auto {
+    width: 6.9rem;
+    margin: auto;
+  }
+}

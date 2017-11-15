@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+  font-size: .24rem;
+}
+
+body {
+  background: #fff;
+}
+
+input,
+textarea,
+button {
+  background: none;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+button {
+  user-select: none;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+}
+.am-list-body {
+  &:before {
+    display: none !important;
+  }
+}
+.am-modal-button{
+  color:#308597 !important;
+  font-size: .28rem !important;
+}

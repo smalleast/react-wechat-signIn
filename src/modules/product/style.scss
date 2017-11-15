@@ -1,0 +1,114 @@
+.product-detail {
+  .detail-swiper {
+    margin-top: 1rem;
+    .slider-list {
+      height: 7.5rem !important;
+
+    }
+  }
+
+  .row-size {
+    width: 5.3rem;
+    .detail-size {
+      line-height: .36rem;
+      margin-left: .2rem;
+    }
+  }
+  .detail {
+    &-name {
+      height: 1.6rem;
+      border: 1px solid #ebeff0;
+      margin-top: .4rem;
+      > .row {
+        height: 1.6rem;
+      }
+      .name {
+        font-size: .42rem;
+        font-weight: bold;
+      }
+      .code {
+        font-size: .24rem;
+        color: #6c6f70;
+        margin-top: .1rem;
+      }
+    }
+    &-offer {
+      color: #a2a2a8;
+      font-size: .22rem;
+      .price {
+        color: #E14B5D;
+        font-size: .32rem;
+      }
+      .desc {
+        color: #E14B5D;
+        font-size: .22rem
+      }
+    }
+    &-specs {
+      color: #6c6f70;
+      font-size: .28rem;
+      &-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #6c6f70;
+        margin-top: .3rem;
+        margin-bottom: .2rem;
+      }
+    }
+    &-button {
+      display: block;
+      outline: 0 none;
+      -webkit-appearance: none;
+      box-sizing: border-box;
+      padding: 0;
+      text-align: center;
+      font-size: .28rem;
+      height: 47px;
+      line-height: 47px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-word;
+      white-space: nowrap;
+      color: #000;
+      background-color: #fff;
+      border: 1PX solid #ddd;
+      border-radius: 5px;
+      margin-bottom: .8rem;
+      &:active {
+        background-color: #ddd;
+      }
+    }
+  }
+}
+
+.download {
+  position: fixed;
+  width: 7.5rem;
+  height: 1rem;
+  top: 0;
+  left: 0;
+  background: #353838;
+  z-index: 99;
+  .left {
+    min-width: 1.2rem;
+  }
+  .center {
+    .download-title {
+      font-size: .24rem;
+      color: #fff;
+    }
+    .download-desc {
+      color: #a2a2a8;
+      font-size: .2rem;
+    }
+  }
+  .right {
+    min-width: 2.4rem;
+    height: 1rem;
+    line-height: 1rem;
+    background: #e14b5d;
+    font-size: .28rem;
+    color: #fff;
+
+  }
+}
