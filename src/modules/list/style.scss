@@ -1,16 +1,29 @@
-.list{
-  .hd{
+.list {
+  .hd {
 
   }
-  .bd{
-    .left{
+  .bd {
+    margin-bottom: .2rem;
+    .left {
       width: 1rem;
+      &-avatar {
+        width: .76rem;
+        height: .76rem;
+        border-radius: .1rem;
+        background: rgb(233, 233, 233);
+      }
     }
-    .center{
+    .center {
 
     }
-    .right{
-
+    .right {
+      .sign {
+        width: 1.46rem;
+        height: .66rem;
+        background: rgb(101, 151, 201);
+        color: #fff;
+        display: inline-block;
+      }
     }
   }
 }
