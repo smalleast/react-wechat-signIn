@@ -39,7 +39,7 @@ export default class extends AppBase {
         <div className="line-d-1"/>
         {
           list.map((item, index) => {
-            return ( <div key={index} className="row row-center wp-auto bd">
+            return ( <a key={index} href="detail"><div className="row row-center wp-auto bd">
               <div className="left tc">
                 <div className="left-avatar">
                   <RA size=".76rem" radius=".1rem"
@@ -56,7 +56,7 @@ export default class extends AppBase {
                   <output className="f10">3人预约</output>
                 </div>
               </div>
-            </div>)
+            </div></a>)
           })
         }
 
