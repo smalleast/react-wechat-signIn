@@ -1,9 +1,11 @@
 .list {
+
   .hd {
 
   }
   .bd {
-    margin-bottom: .2rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
     .left {
       width: 1rem;
       &-avatar {
@@ -14,15 +16,17 @@
       }
     }
     .center {
-
+      .name {
+        font-weight: 700;
+      }
     }
     .right {
       .sign {
         width: 1.46rem;
-        height: .66rem;
         background: rgb(101, 151, 201);
         color: #fff;
         display: inline-block;
+        padding: .1rem;
       }
     }
   }

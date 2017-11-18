@@ -47,7 +47,7 @@ export default class extends AppBase {
                 </div>
               </div>
               <div className="center tl">
-                <output className="db c-50">舞蹈课001</output>
+                <output className="db c-50 name">舞蹈课001</output>
                 <output className="c-137">1课次</output>
               </div>
               <div className="col right tr">
