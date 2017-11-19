@@ -30,7 +30,24 @@ export default class extends AppBase {
   }
 
   init() {
+    const {user_info} = AppBase.$.local;
+    if (typeof user_info === 'string') {
+      let user = JSON.parse(user_info);
+      console.log('user:', user.username);
+      this._restudents(user.useriId).then((res) => {
+        if(res.code===0)
+        {
+          AppBase.$.memory = {
+            list: res
+          }
+        }
 
+      });
+    }
+  }
+
+  _restudents(userId) {
+    return $api.restudents('get', {useriId: userId}, 'list');
   }
 
   signClick = () => {
@@ -70,7 +87,7 @@ export default class extends AppBase {
                 <div className="row row-center">
                   <div className="col left pl10 tl">
                     <output className="db c-50">费先生</output>
-                    <output className="db c-137">18520953265</output>
+                    <output className="db c-137 mt5">18520953265</output>
                   </div>
                   <div className="col right pr10 tr">
                     <button onClick={this.signClick.bind(this)}

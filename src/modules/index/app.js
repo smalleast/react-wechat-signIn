@@ -36,26 +36,45 @@ export default class extends AppBase {
     };
   }
 
+  verification() {
+    const {username, password} = AppBase.$.local;
+    if (username === '') {
+      Toast.fail('用户名不能为空',2);
+      return false;
+    }
+    if (password === '') {
+      Toast.fail('密码不能为空',2);
+      return false;
+    }
+    return true;
+  }
+
   btnLogin() {
     const {username, password} = AppBase.$.local;
-    console.log('u:', username);
-    console.log('p:', password);
-    alert('登录提示', '用户名：' + username + '密码：' + password + '', [
-      {
-        text: '确认',
-        onPress: () => {
+    if (this.verification()) {
+      $api.login('get', {
+        username: username,
+        password: password
+      }).then((res) => {
+        if (res.code === 0) {
+          AppBase.$.local = {
+            user_info: JSON.stringify(res.user)
+          };
           Toast.loading('登录中...', 1, () => {
-            location.href = 'list';
+            location.href = 'list.html';
           })
+        } else if (res.code === 500) {
+          Toast.fail(res.msg,2);
         }
-      }
-    ])
+      });
+    }
   }
 
   render() {
     const {username, password} = AppBase.$.local;
     return (
       <List className="login" id="login">
+        <div className="login-title wp-10 tc">教师登录</div>
         <div className="i-list">
           <input className="wp-10 username" value={username} type="text" placeholder="请输入用户名"
                  onChange={this._onChangeToLocal.bind(this, 'username')}/>

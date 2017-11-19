@@ -28,7 +28,7 @@ export default class AppBase extends ReduxAppBase {
 
     //fastclick:
     FastClick.attach(document.body);
-    Wechat.sign(false);
+    //Wechat.sign(false);
   }
 
   componentWillMount() {

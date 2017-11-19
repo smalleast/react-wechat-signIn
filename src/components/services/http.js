@@ -41,14 +41,7 @@ const WeiPaiHttp = nx.declare({
       // }
     },
     setRequestInterceptor: function () {
-      axios.interceptors.request.use(function (config) {
-        if (config.url.indexOf('/loginByPublic_100') > -1) {
-          config.headers.common = nx.delete(config.headers.common, ['Authorization']);
-        }
-        return config;
-      }, function (error) {
-        nx.error(error);
-      });
+
     },
     error: function (errorResponse) {
       const defer = Q.defer();
@@ -60,11 +53,11 @@ const WeiPaiHttp = nx.declare({
     },
     authorization: function () {
       nxStore.engine = "localStorage";
-      const shanggu_userinfo = nxStore.get('shanggu_userinfo');
-      if (shanggu_userinfo && shanggu_userinfo.accessToken) {
+      const user_info = nxStore.get('user_info');
+      if (user_info && user_info.accessToken) {
         this.setHeaders({
           common: {
-            'Authorization': `Bearer ${shanggu_userinfo.accessToken}`
+            'Authorization': `Bearer ${user_info.salt}`
           }
         });
       }

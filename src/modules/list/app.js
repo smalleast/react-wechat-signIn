@@ -19,7 +19,24 @@ export default class extends AppBase {
   }
 
   init() {
+    const {user_info} = AppBase.$.local;
+    if (typeof user_info === 'string') {
+      let user = JSON.parse(user_info);
+      console.log('user:', user.username);
+      this._recourse(user.useriId).then((res) => {
+        if(res.code===0)
+        {
+          AppBase.$.memory = {
+            list: res
+          }
+        }
 
+      });
+    }
+  }
+
+  _recourse(userId) {
+    return $api.recourse('get', {useriId: userId}, '/list');
   }
 
 
@@ -39,24 +56,26 @@ export default class extends AppBase {
         <div className="line-d-1"/>
         {
           list.map((item, index) => {
-            return ( <a key={index} href="detail"><div className="row row-center wp-auto bd">
-              <div className="left tc">
-                <div className="left-avatar">
-                  <RA size=".76rem" radius=".1rem"
-                      url="http://oss.zhulogic.com/product_image/cp7b4b4b7c12e64b9b97ee06553eb3af90.png?x-oss-process=style/w660"/>
+            return (<a key={index} href="detail.html">
+              <div className="row row-center wp-auto bd">
+                <div className="left tc">
+                  <div className="left-avatar">
+                    <RA size=".76rem" radius=".1rem"
+                        url="http://oss.zhulogic.com/product_image/cp7b4b4b7c12e64b9b97ee06553eb3af90.png?x-oss-process=style/w660"/>
+                  </div>
+                </div>
+                <div className="center tl">
+                  <output className="db c-50 name">舞蹈课001</output>
+                  <output className="c-137">1课次</output>
+                </div>
+                <div className="col right tr">
+                  <div className="sign tc">
+                    <output className="db f12">扫码签到</output>
+                    <output className="f10">3人预约</output>
+                  </div>
                 </div>
               </div>
-              <div className="center tl">
-                <output className="db c-50 name">舞蹈课001</output>
-                <output className="c-137">1课次</output>
-              </div>
-              <div className="col right tr">
-                <div className="sign tc">
-                  <output className="db f12">扫码签到</output>
-                  <output className="f10">3人预约</output>
-                </div>
-              </div>
-            </div></a>)
+            </a>)
           })
         }
 
