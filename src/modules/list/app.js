@@ -62,7 +62,7 @@ export default class extends AppBase {
         {
           list.length > 0 && list.map((item, index) => {
             return (<a key={index}
-                       href={'detail.html?id=' + item.teacherId + '&name=' + item.name + '&time=' + item.courseTime + '&teacher=' + item.teacher + ''}>
+                       href={'detail.html?id=' + item.id + '&name=' + item.name + '&time=' + item.courseTime + '&teacher=' + item.teacher + ''}>
               <div className="row row-center wp-auto bd">
                 <div className="left tc">
                   <div className="left-avatar">
@@ -76,8 +76,7 @@ export default class extends AppBase {
                 </div>
                 <div className="col right tr">
                   <div className="sign tc">
-                    <output className="db f12">扫码签到</output>
-                    <output className="f10">3人预约</output>
+                    <output className="db f14">打卡</output>
                   </div>
                 </div>
               </div>
