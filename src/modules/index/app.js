@@ -39,11 +39,11 @@ export default class extends AppBase {
   verification() {
     const {username, password} = AppBase.$.local;
     if (username === '') {
-      Toast.fail('用户名不能为空',2);
+      Toast.fail('用户名不能为空', 2);
       return false;
     }
     if (password === '') {
-      Toast.fail('密码不能为空',2);
+      Toast.fail('密码不能为空', 2);
       return false;
     }
     return true;
@@ -60,11 +60,9 @@ export default class extends AppBase {
           AppBase.$.local = {
             user_info: JSON.stringify(res.user)
           };
-          Toast.loading('登录中...', 1, () => {
-            location.href = 'list.html';
-          })
+          location.href = 'list.html';
         } else if (res.code === 500) {
-          Toast.fail(res.msg,2);
+          Toast.fail(res.msg, 2);
         }
       });
     }

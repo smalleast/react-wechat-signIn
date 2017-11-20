@@ -9,7 +9,9 @@ export default class extends AppBase {
         wxImages: []
       },
       memory: {
-        list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        list: [],
+        top: {}
+
       }
     }
   }
@@ -23,11 +25,11 @@ export default class extends AppBase {
     if (typeof user_info === 'string') {
       let user = JSON.parse(user_info);
       console.log('user:', user.username);
-      this._recourse(user.useriId).then((res) => {
-        if(res.code===0)
-        {
+      this._recourse(user.userId).then((res) => {
+        if (res.code === 0) {
           AppBase.$.memory = {
-            list: res
+            list: res.list,
+            top: res.list[0]
           }
         }
 
@@ -36,7 +38,7 @@ export default class extends AppBase {
   }
 
   _recourse(userId) {
-    return $api.recourse('get', {useriId: userId}, '/list');
+    return $api.recourse('get', userId, 'list');
   }
 
 
@@ -46,17 +48,21 @@ export default class extends AppBase {
   }
 
   render() {
-    const {list} = AppBase.$.memory;
+    const {list, top} = AppBase.$.memory;
     return (
       <div className="list">
-        <div className="row row-center wp-auto hd">
-          <div className="col tl c-50">费先生</div>
-          <div className="col tr c-137">09:23-10:20</div>
-        </div>
+        {
+          !!top && <div className="row row-center wp-auto hd">
+            {<div className="col tl c-50">{top.teacher}</div>}
+            <div className="col tr c-137">{top.courseTime}</div>
+          </div>
+        }
+
         <div className="line-d-1"/>
         {
-          list.map((item, index) => {
-            return (<a key={index} href="detail.html">
+          list.length > 0 && list.map((item, index) => {
+            return (<a key={index}
+                       href={'detail.html?id=' + item.teacherId + '&name=' + item.name + '&time=' + item.courseTime + '&teacher=' + item.teacher + ''}>
               <div className="row row-center wp-auto bd">
                 <div className="left tc">
                   <div className="left-avatar">
@@ -65,7 +71,7 @@ export default class extends AppBase {
                   </div>
                 </div>
                 <div className="center tl">
-                  <output className="db c-50 name">舞蹈课001</output>
+                  {<output className="db c-50 name">{item.name}</output>}
                   <output className="c-137">1课次</output>
                 </div>
                 <div className="col right tr">

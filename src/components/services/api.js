@@ -16,24 +16,27 @@ export default nx.declare({
       let Apis = Config.API_WITHOUT_TOKEN;
       Apis.items.forEach((item) => {
         this[item] = (method, inData, inApi) => {
+          let _item = '';
           if (typeof inApi === 'string' && !!inApi) {
-            item += '/' + inApi;
+            _item = item + '/' + inApi;
+          } else {
+            _item = item;
           }
           switch (method) {
             case 'post':
-              return Http.post(`${Apis.baseUrl}${item}`, inData);
+              return Http.post(`${Apis.baseUrl}${_item}`, inData);
               break;
             case 'get':
-              return Http.get(`${Apis.baseUrl}${item}`, inData);
+              return Http.get(`${Apis.baseUrl}${_item}`, inData);
               break;
             case 'put':
-              return Http.put(`${Apis.baseUrl}${item}`, inData);
+              return Http.put(`${Apis.baseUrl}${_item}`, inData);
               break;
             case 'delete':
-              return Http.delete(`${Apis.baseUrl}${item}`, inData);
+              return Http.delete(`${Apis.baseUrl}${_item}`, inData);
               break;
             default:
-              return Http.get(`${Apis.baseUrl}${item}`, inData);
+              return Http.get(`${Apis.baseUrl}${_item}`, inData);
               break;
           }
         };
@@ -43,24 +46,27 @@ export default nx.declare({
       let Apis = Config.API_WITH_TOKEN;
       Apis.items.forEach((item) => {
         this[item] = (method, inData, inApi) => {
+          let _item = '';
           if (typeof inApi === 'string' && !!inApi) {
-            item += '/' + inApi;
+            _item = item + '/' + inApi;
+          } else {
+            _item = item;
           }
           switch (method) {
             case 'post':
-              return Http.post(`${Apis.baseUrl}${item}`, inData);
+              return Http.post(`${Apis.baseUrl}${_item}`, inData);
               break;
             case 'get':
-              return Http.get(`${Apis.baseUrl}${item}`, inData);
+              return Http.get(`${Apis.baseUrl}${_item}`, inData);
               break;
             case 'put':
-              return Http.put(`${Apis.baseUrl}${item}`, inData);
+              return Http.put(`${Apis.baseUrl}${_item}`, inData);
               break;
             case 'delete':
-              return Http.delete(`${Apis.baseUrl}${item}`, inData);
+              return Http.delete(`${Apis.baseUrl}${_item}`, inData);
               break;
             default:
-              return Http.get(`${Apis.baseUrl}${item}`, inData);
+              return Http.get(`${Apis.baseUrl}${_item}`, inData);
               break;
           }
         };

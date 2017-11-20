@@ -34,11 +34,10 @@ export default class extends AppBase {
     if (typeof user_info === 'string') {
       let user = JSON.parse(user_info);
       console.log('user:', user.username);
-      this._restudents(user.useriId).then((res) => {
-        if(res.code===0)
-        {
+      this._restudents().then((res) => {
+        if (res.code === 0) {
           AppBase.$.memory = {
-            list: res
+            list: res.list
           }
         }
 
@@ -46,11 +45,12 @@ export default class extends AppBase {
     }
   }
 
-  _restudents(userId) {
-    return $api.restudents('get', {useriId: userId}, 'list');
+  _restudents() {
+    const {id} = nx.hashlize();
+    return $api.restudents('get', id, 'list');
   }
 
-  signClick = () => {
+  signClick = (item) => {
     const alertInstance = Modal.alert('确认签到', '您确认要签到吗？签到后是不能取消的哦，请谨慎操作哦', [
       {
         text: '取消', onPress: () => {
@@ -60,6 +60,11 @@ export default class extends AppBase {
       {
         text: '确认', onPress: () => {
         console.log('确认');
+        item.active = true;
+        const {list} = AppBase.$.memory;
+        AppBase.$.memory = {
+          list: list
+        }
       }
       }
     ])
@@ -71,26 +76,27 @@ export default class extends AppBase {
 
   render() {
     const {list} = AppBase.$.memory;
+    const {name, teacher, time} = nx.hashlize();
     return (
       <div className="detail">
         <div className="hd bg-47">
           <div className="content tc">
-            <output className="f16 c-f db">舞蹈课001</output>
-            <output className="f10 c-f db mt10">费先生</output>
-            <output className="f10 c-f db mt5">11月12号-09:23-10:20</output>
+            {<output className="f16 c-f db">{name}</output>}
+            {<output className="f10 c-f db mt10">{teacher}</output>}
+            {<output className="f10 c-f db mt5">{time}</output>}
           </div>
         </div>
         <div className="bd">
           {
-            list.map((item, index) => {
+            list.length > 0 && list.map((item, index) => {
               return ( <div key={index} className="list">
                 <div className="row row-center">
                   <div className="col left pl10 tl">
-                    <output className="db c-50">费先生</output>
-                    <output className="db c-137 mt5">18520953265</output>
+                    {<output className="db c-50">{item.name}</output>}
+                    {<output className="db c-137 mt5">{item.phone}</output>}
                   </div>
                   <div className="col right pr10 tr">
-                    <button onClick={this.signClick.bind(this)}
+                    <button onClick={this.signClick.bind(this, item)}
                             className={classNames('button', {'active': item.active})}>签到
                     </button>
                   </div>
