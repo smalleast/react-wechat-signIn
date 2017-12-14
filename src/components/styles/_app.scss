@@ -38,9 +38,18 @@ figure {
   }
 }
 
-.am-modal-button {
-  color: #308597 !important;
-  font-size: .28rem !important;
+.am-modal-footer {
+  > .am-modal-button-group-h {
+    > .am-modal-button {
+      color: #99C72C;
+      font-size: .28rem;
+      &:first-child{
+        color: #99C72C;
+        font-size: .28rem;
+      }
+    }
+  }
+
 }
 
 a {

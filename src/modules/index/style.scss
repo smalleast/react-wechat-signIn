@@ -1,18 +1,21 @@
 #login {
   width: 5rem;
   margin: 1rem auto;
-  font-size: 12px;
   input {
-    height: .88rem;
-    line-height: .88rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
   }
   .i-list {
     border-bottom: 1px solid #ddd;
 
   }
   .login-title {
-    font-size: .48rem;
+    font-size: .6rem;
     margin-bottom: .4rem;
   }
-
+  .am-button {
+    > span {
+      font-size: .36rem;
+    }
+  }
 }

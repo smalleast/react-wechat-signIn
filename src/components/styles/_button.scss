@@ -1,0 +1,23 @@
+.button {
+  width: 1.2rem;
+  height: .6rem;
+  color: #fff;
+  background: #99C72C;
+  border-radius: 3px;
+  &.active {
+    color: #fff;
+    background: #bebebe;
+  }
+  &:disabled, &[disabled] {
+    color: #bfbfbf;
+    background: #efefef;
+  }
+  &-over {
+    width: 7.5rem;
+    height: 1.2rem;
+    border-radius: 0;
+    &:hover {
+      opacity: .8;
+    }
+  }
+}

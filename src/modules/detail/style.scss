@@ -19,21 +19,10 @@
 
         }
         .right {
-          .button {
-            width: 1.2rem;
-            height: .6rem;
-            border: 1px solid rgb(221, 69, 114);
-            color: rgb(50, 50, 50);
-            &.active {
-              border: 1px solid rgb(195, 217, 246);
-              color: rgb(29, 123, 35);
-            }
-          }
+
         }
-      }
-      &:active{
-        background: #ddd;
       }
     }
   }
+
 }

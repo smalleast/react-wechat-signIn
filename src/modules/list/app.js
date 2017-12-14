@@ -1,5 +1,6 @@
 import AppBase, {$api, $app, $store, $utils, $wechat} from 'components/scripts/index';
 import RA from 'react-avatar';
+import logo from '../../assets/images/logo.png';
 
 export default class extends AppBase {
 
@@ -21,24 +22,17 @@ export default class extends AppBase {
   }
 
   init() {
-    const {user_info} = AppBase.$.local;
-    if (typeof user_info === 'string') {
-      let user = JSON.parse(user_info);
-      console.log('user:', user.username);
-      this._recourse().then((res) => {
-        if (res.code === 0) {
-          AppBase.$.memory = {
-            list: res.list,
-            top: res.list[0]
-          }
-        }
-
-      });
-    }
+    this._recourse().then((res) => {
+      AppBase.$.memory = {
+        list: res,
+        top: res[0]
+      }
+    });
   }
 
   _recourse(userId) {
-    return $api.reclass('get', '', 'list');
+    const {user_info} = $store.local;
+    return $api.reclass('get', user_info.userId, 'lists');
   }
 
 
@@ -48,42 +42,36 @@ export default class extends AppBase {
   }
 
   render() {
-    const {list, top} = AppBase.$.memory;
+    const {list} = AppBase.$.memory;
     return (
       <div className="list">
         {
-          !!top && <div className="row row-center wp-auto hd">
-            {<div className="col tl c-50">{top.teacher}</div>}
-            <div className="col tr c-137">{top.courseTime}</div>
-          </div>
-        }
-
-        <div className="line-d-1"/>
-        {
           list.length > 0 && list.map((item, index) => {
             return (<a key={index}
-                       href={'detail.html?id=' + item.id + '&name=' + item.name + '&time=' + item.courseTime + '&teacher=' + item.teacher + ''}>
+                       href={'detail.html?id=' + item.id + '&courseName=' + item.courseName + '&courseTime=' + item.courseTime + ''}>
               <div className="row row-center wp-auto bd">
                 <div className="left tc">
                   <div className="left-avatar">
-                    <RA size=".76rem" radius=".1rem"
-                        url="http://oss.zhulogic.com/product_image/cp7b4b4b7c12e64b9b97ee06553eb3af90.png?x-oss-process=style/w660"/>
+                    <RA size=".76rem" radius=".06rem"
+                        url={logo}/>
                   </div>
                 </div>
                 <div className="center tl">
-                  {<output className="db c-50 name">{item.name}</output>}
-                  <output className="c-137">1课次</output>
+                  {<output className="db f14 c-50 name">{item.courseName}</output>}
+                  <output className="f16 c-137">{item.courseTime}</output>
                 </div>
                 <div className="col right tr">
                   <div className="sign tc">
-                    <output className="db f14">打卡</output>
+                    <output className="db f14">点名</output>
                   </div>
                 </div>
               </div>
             </a>)
           })
         }
-
+        {
+          list.length ===0 &&<div className="c-3 f18 tc mt40">暂无课程表</div>
+        }
       </div>
     )
   }

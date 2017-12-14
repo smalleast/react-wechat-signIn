@@ -21,7 +21,10 @@ export default class extends AppBase {
   }
 
   init() {
-
+    const {user_info} = $store.local;
+    if (user_info) {
+      location.href = 'list.html';
+    }
   }
 
 
@@ -31,13 +34,13 @@ export default class extends AppBase {
   }
 
   _onChangeToLocal(inField, inEvent) {
-    $store.local = {
+    AppBase.$.local = {
       [inField]: inEvent.target.value
     };
   }
 
   verification() {
-    const {username, password} = $store.local;
+    const {username, password} = AppBase.$.local;
     if (username === '') {
       Toast.fail('用户名不能为空', 2);
       return false;
@@ -50,7 +53,7 @@ export default class extends AppBase {
   }
 
   btnLogin() {
-    const {username, password} = $store.local;
+    const {username, password} = AppBase.$.local;
     if (this.verification()) {
       $api.login('get', {
         username: username,
@@ -72,17 +75,17 @@ export default class extends AppBase {
     const {username, password} = AppBase.$.local;
     return (
       <List className="login" id="login">
-        <div className="login-title wp-10 tc">教师登录</div>
+        <div className="login-title wp-10 tc f20">教师登录</div>
         <div className="i-list">
-          <input className="wp-10 username" value={username} type="text" placeholder="请输入用户名"
+          <input className="wp-10 f18 username" value={username} type="text" placeholder="请输入用户名"
                  onChange={this._onChangeToLocal.bind(this, 'username')}/>
         </div>
         <div className="i-list">
-          <input className="wp-10 password" value={password} type="password" placeholder="请输入密码"
+          <input className="wp-10 f18 password" value={password} type="password" placeholder="请输入密码"
                  onChange={this._onChangeToLocal.bind(this, 'password')}/>
         </div>
         <div>
-          <Button className="mt20" onClick={this.btnLogin.bind(this)}>登录</Button>
+          <Button className="mt20 f16" onClick={this.btnLogin.bind(this)}>登录</Button>
         </div>
       </List>
     )

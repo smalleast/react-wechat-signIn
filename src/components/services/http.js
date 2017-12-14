@@ -38,10 +38,9 @@ const WeiPaiHttp = nx.declare({
       return inResponse.data;
     },
     authorization: function (inRequest) {
-      console.log(inRequest);
       const {user_info} = $store.local;
-      if (user_info && user_info.salt) {
-        inRequest.headers.common['Authorization'] = user_info.salt;
+      if (user_info && user_info.accessToken) {
+        inRequest.headers.common['Authorization'] = user_info.accessToken;
       }
       return inRequest;
     }
