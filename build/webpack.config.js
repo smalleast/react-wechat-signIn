@@ -22,7 +22,7 @@ module.exports = {
   devServer: {
     port: 80,
     hot: true,
-    host: '192.168.10.176',
+    host: '192.168.10.229',
     stats: 'errors-only',
     proxy: {
 

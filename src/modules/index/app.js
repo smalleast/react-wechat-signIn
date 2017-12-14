@@ -31,13 +31,13 @@ export default class extends AppBase {
   }
 
   _onChangeToLocal(inField, inEvent) {
-    AppBase.$.local = {
+    $store.local = {
       [inField]: inEvent.target.value
     };
   }
 
   verification() {
-    const {username, password} = AppBase.$.local;
+    const {username, password} = $store.local;
     if (username === '') {
       Toast.fail('用户名不能为空', 2);
       return false;
@@ -50,15 +50,15 @@ export default class extends AppBase {
   }
 
   btnLogin() {
-    const {username, password} = AppBase.$.local;
+    const {username, password} = $store.local;
     if (this.verification()) {
       $api.login('get', {
         username: username,
         password: password
       }).then((res) => {
         if (res.code === 0) {
-          AppBase.$.local = {
-            user_info: JSON.stringify(res.user)
+          $store.local = {
+            user_info: res.user
           };
           location.href = 'list.html';
         } else if (res.code === 500) {

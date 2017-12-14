@@ -25,7 +25,7 @@ export default class extends AppBase {
     if (typeof user_info === 'string') {
       let user = JSON.parse(user_info);
       console.log('user:', user.username);
-      this._recourse(user.userId).then((res) => {
+      this._recourse().then((res) => {
         if (res.code === 0) {
           AppBase.$.memory = {
             list: res.list,
@@ -38,7 +38,7 @@ export default class extends AppBase {
   }
 
   _recourse(userId) {
-    return $api.recourse('get', userId, 'list');
+    return $api.reclass('get', '', 'list');
   }
 
 

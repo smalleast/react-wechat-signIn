@@ -1,5 +1,5 @@
 import nxAxios from 'react-axios';
-import nxStore from 'react-store';
+import $store from 'react-store';
 import Config from './config';
 import Q from 'q';
 import $route from './route';
@@ -20,27 +20,13 @@ const WeiPaiHttp = nx.declare({
     init: function () {
       const env = nx.hashlize().env;
       this.$base.init.call(this);
-      this.authorization();
       this.initHeaders();
       this.setDefaults({
         timeout: 600000,
         baseURL: Config.SERVER_URL || './'
       });
-      this.setRequestInterceptor();
     },
     initHeaders: function () {
-      //mock:
-      // let hash = nx.hashlize();
-      // let token = hash.token;
-      // if (token) {
-      //   this.setHeaders({
-      //     common: {
-      //       'Authorization': `Bearer ${token}`
-      //     }
-      //   })
-      // }
-    },
-    setRequestInterceptor: function () {
 
     },
     error: function (errorResponse) {
@@ -51,16 +37,13 @@ const WeiPaiHttp = nx.declare({
     toData: function (inResponse) {
       return inResponse.data;
     },
-    authorization: function () {
-      nxStore.engine = "localStorage";
-      const user_info = nxStore.get('user_info');
-      if (user_info && user_info.accessToken) {
-        this.setHeaders({
-          common: {
-            'Authorization': `Bearer ${user_info.salt}`
-          }
-        });
+    authorization: function (inRequest) {
+      console.log(inRequest);
+      const {user_info} = $store.local;
+      if (user_info && user_info.salt) {
+        inRequest.headers.common['Authorization'] = user_info.salt;
       }
+      return inRequest;
     }
   }
 });
