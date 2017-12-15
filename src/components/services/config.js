@@ -8,7 +8,7 @@ export default class {
   static SERVER_URL = SERVER_URL;
 
   static API_WITH_TOKEN = {
-    baseUrl: '',
+    baseUrl: '/renren/',
     items: [
       'reclass',
       'restudents',
@@ -16,7 +16,7 @@ export default class {
     ]
   };
   static API_WITHOUT_TOKEN = {
-    baseUrl: '/sys/',
+    baseUrl: '/renren/sys/',
     items: [
       'login',
     ]

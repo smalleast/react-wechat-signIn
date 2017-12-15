@@ -43,6 +43,7 @@ export default class extends AppBase {
 
   render() {
     const {list} = AppBase.$.memory;
+    console.log('list:',list);
     return (
       <div className="list">
         {
