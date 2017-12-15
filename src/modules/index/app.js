@@ -23,6 +23,7 @@ export default class extends AppBase {
   init() {
     const {user_info} = $store.local;
     if (user_info) {
+
       location.href = 'list.html';
     }
   }
