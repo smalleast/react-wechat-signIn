@@ -1,5 +1,5 @@
 .list {
-
+  padding-bottom: 1.5rem;
   .hd {
 
   }
@@ -29,5 +29,10 @@
         padding: .2rem;
       }
     }
+  }
+  .fd {
+    position: fixed;
+    left: 0;
+    bottom: 0;
   }
 }

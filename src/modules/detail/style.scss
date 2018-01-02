@@ -1,4 +1,5 @@
 .detail {
+  padding-bottom: 1.5rem;
   .hd {
     width: 7.5rem;
     height: 3.6rem;
@@ -24,5 +25,9 @@
       }
     }
   }
-
+  .fd {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+  }
 }

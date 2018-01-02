@@ -118,7 +118,7 @@ export default class extends AppBase {
                       className="f14 ml10 c-137">剩余{item.times || 0}课次</span></output>}
                     {<output className="db f14 c-137 mt5">{item.phone }</output>}
                   </div>
-                  <div className="col right pr10 tr">
+                  <div className="right pr10 tr">
                     <button onClick={this.signClick.bind(this, item)}
                             className={classNames('button', {'active': item.active})} disabled={item.active}>签到
                     </button>
