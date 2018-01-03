@@ -51,6 +51,9 @@ export default class extends AppBase {
   _recourseQiandao(studentId) {
     const {id} = nx.hashlize();
     const {user_info} = $store.local;
+    if(!user_info){
+      location.href = 'index.html';
+    }
     return $api.recourse('get', id + '/' + user_info.userId, 'qiandao');
   }
 

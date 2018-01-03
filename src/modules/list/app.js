@@ -33,18 +33,20 @@ export default class extends AppBase {
 
   _recourse(userId) {
     const {user_info} = $store.local;
+    if(!user_info){
+      location.href = 'index.html';
+    }
     return $api.reclass('get', user_info.userId, 'lists');
   }
 
 
   componentDidMount() {
 
-
   }
 
   _logout() {
     $store.clear('user_info');
-    location.href = 'login.html';
+    location.href = 'index.html';
   }
 
   render() {
