@@ -36,7 +36,7 @@ export default class extends AppBase {
     if(!user_info){
       location.href = 'index.html';
     }
-    return $api.reclass('get', user_info.userId, 'lists');
+    return $api.recourse('get', '', 'lists');
   }
 
 
@@ -58,7 +58,7 @@ export default class extends AppBase {
           {
             list.length > 0 && list.map((item, index) => {
               return (<a key={index}
-                         href={'detail.html?id=' + item.courseId + '&courseName=' + item.courseName + '&courseTime=' + item.courseTime + ''}>
+                         href={'detail.html?id=' + item.id + '&courseName=' + item.name + '&courseTime=' + item.courseTime + ''}>
                 <div className="row row-center wp-auto bd">
                   <div className="left tc">
                     <div className="left-avatar">
@@ -67,7 +67,7 @@ export default class extends AppBase {
                     </div>
                   </div>
                   <div className="center tl">
-                    {<output className="db f14 c-50 name">{item.courseName}</output>}
+                    {<output className="db f14 c-50 name">{item.name}</output>}
                     <output className="f16 c-137">{item.courseTime}</output>
                   </div>
                   <div className="col right tr">

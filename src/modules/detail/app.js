@@ -26,15 +26,21 @@ export default class extends AppBase {
     }
   }
 
+  state = {
+    lists: [],
+    hasOver: false
+  };
+
   componentWillMount() {
     this.init();
   }
 
   init() {
     this._restudents().then((res) => {
-      AppBase.$.memory = {
+      this.setState({
         list: res
-      }
+      })
+
     });
   }
 
@@ -45,20 +51,20 @@ export default class extends AppBase {
 
   _restudentsQiandao(studentId) {
     const {id} = nx.hashlize();
-    return $api.restudents('get', studentId + '/' + id, 'qiandao');
+    return $api.restudents('get', studentId, 'qiandao');
   }
 
   _recourseQiandao(studentId) {
     const {id} = nx.hashlize();
     const {user_info} = $store.local;
-    if(!user_info){
+    if (!user_info) {
       location.href = 'index.html';
     }
     return $api.recourse('get', id + '/' + user_info.userId, 'qiandao');
   }
 
-  signClick = (item) => {
-    const alertInstance = Modal.alert('确认签到', '您确认【' + item.name + '】签到吗？签到后是不能取消的哦，     请谨慎操作哦', [
+  signClick = (inItem) => {
+    const alertInstance = Modal.alert('确认签到', '您确认【' + inItem.name + '】签到吗？签到后是不能取消的哦，     请谨慎操作哦', [
       {
         text: '取消', onPress: () => {
           console.log('取消');
@@ -66,9 +72,18 @@ export default class extends AppBase {
       },
       {
         text: '确认', onPress: () => {
-          item.active = true;
-          this._restudentsQiandao(item.id).then(res => {
+          this._restudentsQiandao(inItem.id).then(res => {
             console.log('学生签到成功:', res);
+            const {list} = this.state;
+            let newList = list.map((item, index) => {
+              if (item.id === inItem.id) {
+                item.active = true;
+              }
+              return item;
+            });
+            this.setState({
+              list: newList
+            });
           })
         }
       }
@@ -83,12 +98,11 @@ export default class extends AppBase {
       },
       {
         text: '确认', onPress: () => {
-          const {hasOver} = AppBase.$.memory;
           this._recourseQiandao().then(res => {
             console.log('老师签到成功:', res);
-            AppBase.$.memory = {
+            this.setState({
               hasOver: true
-            }
+            });
           })
         }
       }
@@ -101,7 +115,7 @@ export default class extends AppBase {
   }
 
   render() {
-    const {list, hasOver} = AppBase.$.memory;
+    const {list, hasOver} = this.state;
     const {courseName, courseTime} = nx.hashlize();
     return (
       <div className="detail">
@@ -113,13 +127,13 @@ export default class extends AppBase {
         </div>
         <div className="bd">
           {
-            list.length > 0 && list.map((item, index) => {
+            list && list.map((item, index) => {
               return (<div key={index} className="list">
                 <div className="row row-center">
                   <div className="col left pl10 tl">
-                    {<output className="db f18 c-50">{item.name } <span
+                    {<output className="db f18 c-50">{item.name} <span
                       className="f14 ml10 c-137">剩余{item.times || 0}课次</span></output>}
-                    {<output className="db f14 c-137 mt5">{item.phone }</output>}
+                    {<output className="db f14 c-137 mt5">{item.phone}</output>}
                   </div>
                   <div className="right pr10 tr">
                     <button onClick={this.signClick.bind(this, item)}
@@ -132,8 +146,9 @@ export default class extends AppBase {
           }
 
         </div>
-        <div className="fd mt20">
-          {<button onClick={this.overClick.bind(this)} className={classNames('button button-over f18', {'active': hasOver})}
+        <div className="fd mt20" hidden>
+          {<button onClick={this.overClick.bind(this)}
+                   className={classNames('button button-over f18', {'active': hasOver})}
                    disabled={hasOver}>
             结课打卡
           </button>}
